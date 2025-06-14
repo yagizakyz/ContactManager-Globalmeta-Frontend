@@ -6,17 +6,18 @@ import { useRouter } from "next/navigation";
 export default function SignupPage() {
   const router = useRouter();
 
-  const [Name, setName] = useState("");
-  const [Surname, setSurname] = useState("");
-  const [Email, setEmail] = useState("");
-  const [PhoneNumber, setPhoneNumber] = useState("");
-  const [Password, setPassword] = useState("");
+  // REVIEW : useState ile tanımlanan state isimleri küçük harfle başlamalıdır (örn. name, setName). Büyük harfle başlatmak React component veya class isimleriyle karışıklık yaratabilir.
+  const [name, setName] = useState("");
+  const [surname, setSurname] = useState("");
+  const [email, setEmail] = useState("");
+  const [phoneNumber, setPhoneNumber] = useState("");
+  const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (!Name || !Surname || !Email || !PhoneNumber || !Password) {
+    if (!name || !surname || !email || !phoneNumber || !password) {
       alert("Lütfen tüm alanları doldurun.");
       return;
     }
@@ -24,15 +25,17 @@ export default function SignupPage() {
     setLoading(true);
 
     try {
+      // REVIEW : API adresi "baglanti-adresi" olarak sabit yazılmış. Bunu bir environment variable veya config dosyasından almak daha güvenli ve sürdürülebilirdir.
+      // Ayrıca, bu işlemler contextte veya bir helper klasöründe tanımlanması daha iyi olur.
       const response = await fetch("baglanti-adresi", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          Name,
-          Surname,
-          Email,
-          PhoneNumber,
-          Password,
+          name,
+          surname,
+          email,
+          phoneNumber,
+          password,
         }),
       });
 
@@ -41,7 +44,6 @@ export default function SignupPage() {
         alert("Kayıt başarısız: " + (errorData.message || response.statusText));
         return;
       }
-
 
       const data = await response.json();
       alert("Kayıt başarılı!");
@@ -70,7 +72,7 @@ export default function SignupPage() {
           id="Name"
           type="text"
           required
-          value={Name}
+          value={name}
           onChange={(e) => setName(e.target.value)}
           placeholder="Adınızı girin"
           className="w-full rounded border border-gray-300 p-3 mb-4 placeholder-black text-black focus:outline-none focus:ring-2 focus:ring-blue-500"
@@ -84,7 +86,7 @@ export default function SignupPage() {
           id="Surname"
           type="text"
           required
-          value={Surname}
+          value={surname}
           onChange={(e) => setSurname(e.target.value)}
           placeholder="Soyadınızı girin"
           className="w-full rounded border border-gray-300 p-3 mb-4 placeholder-black text-black focus:outline-none focus:ring-2 focus:ring-blue-500"
@@ -98,7 +100,7 @@ export default function SignupPage() {
           id="Email"
           type="email"
           required
-          value={Email}
+          value={email}
           onChange={(e) => setEmail(e.target.value)}
           placeholder="mail@ornek.com"
           className="w-full rounded border border-gray-300 p-3 mb-4 placeholder-black text-black focus:outline-none focus:ring-2 focus:ring-blue-500"
@@ -112,7 +114,7 @@ export default function SignupPage() {
           id="PhoneNumber"
           type="tel"
           required
-          value={PhoneNumber}
+          value={phoneNumber}
           onChange={(e) => setPhoneNumber(e.target.value)}
           placeholder="+90 5XX XXX XX XX"
           className="w-full rounded border border-gray-300 p-3 mb-4 placeholder-black text-black focus:outline-none focus:ring-2 focus:ring-blue-500"
@@ -127,7 +129,7 @@ export default function SignupPage() {
           type="password"
           required
           minLength={6}
-          value={Password}
+          value={password}
           onChange={(e) => setPassword(e.target.value)}
           placeholder="Şifrenizi girin"
           className="w-full rounded border border-gray-300 p-3 mb-6 placeholder-black text-black focus:outline-none focus:ring-2 focus:ring-blue-500"

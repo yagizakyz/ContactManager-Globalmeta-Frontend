@@ -10,6 +10,7 @@ export default function CardShowPage() {
   const [links, setLinks] = useState([]);
   const [showToast, setShowToast] = useState(false); // Toast için state
 
+  // REVIEW : API'den dönen data[0] ile ilk eleman alınıyor, veri yapısı değişirse hata çıkar. Backend'den tek kart nesnesi beklenmeli. Yada data[0] nın varlığı kontrol edilmeli.
   const fetchData = async () => {
     try {
       const res = await fetch(`baglanti-adresi`);
@@ -33,10 +34,12 @@ export default function CardShowPage() {
     fetchData();
   }, [card_id]);
 
+  // REVIEW : window.location.href doğrudan kullanılıyor, SSR ortamında undefined olabilir. Next.js router'dan alınmalı veya kontrol edilmeli.
   const handleShare = async () => {
     try {
       await navigator.clipboard.writeText(window.location.href);
       setShowToast(true);
+      // REVIEW : Toast için kütüphane veya kendi componentini kullanabilirsin
       setTimeout(() => {
         setShowToast(false);
       }, 3000); // 3 saniyede kaybolur
@@ -95,6 +98,7 @@ export default function CardShowPage() {
 
       {/* QR Kod */}
       <div className="bg-white p-4 rounded-xl shadow">
+        {/* REVIEW : window nesnesi SSR'da undefined olabilir, kontrol edilmeli. */}
         <QRCode value={typeof window !== "undefined" ? window.location.href : ""} size={180} />
       </div>
 

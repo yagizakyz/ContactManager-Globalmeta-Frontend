@@ -1,3 +1,4 @@
+// REVIEW : use client direktifi doğru kullanılmış, Next.js 13+ ile client component olarak işaretlenmiş.
 "use client";
 
 import { useState } from "react";
@@ -13,11 +14,13 @@ export default function LoginPage() {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
+  // REVIEW : handleSubmit fonksiyonu async/await ile yazılmış, hata yönetimi mevcut. Ancak, API adresi "baglanti-adresi" olarak sabit yazılmış, .env dosyasından alınmalı.
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
 
     try {
+      // REVIEW : API endpointi sabit string, .env ile yönetilmesi önerilir.
       const res = await fetch("baglanti-adresi", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -26,6 +29,7 @@ export default function LoginPage() {
 
       const result = await res.json();
 
+      // REVIEW : Başarılı girişte localStorage kullanımı uygun, ancak güvenlik için token'ı httpOnly cookie ile saklamak daha güvenli olur.
       if (res.ok) {
         localStorage.setItem("token", result.access_token);
         localStorage.setItem("user_id", result.user_id);
@@ -43,6 +47,8 @@ export default function LoginPage() {
   return (
     <main className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-400 to-indigo-600 p-4">
       <form
+      // REVIEW : aşağıdaki fonksiyon async yazılmış, ancak form submit işlemi için async/await kullanımı eksik. Promise veya helper arakatmanı kullanılarak asyncron yapı kurulabilir.
+      // eğer gerekli değilse, async/await kaldırılabilir.
         onSubmit={handleSubmit}
         className="bg-white p-6 rounded-xl w-full max-w-sm shadow-lg space-y-4"
       >

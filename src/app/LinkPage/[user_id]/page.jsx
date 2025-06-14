@@ -110,7 +110,7 @@ export default function LinkPage() {
     <div className="min-h-screen bg-[#3F48CC] flex justify-center items-start py-10 px-4">
       <div className="bg-white w-full max-w-md p-6 rounded-xl shadow space-y-4">
         <h1 className="text-xl font-bold text-center text-black">Link Oluştur</h1>
-
+        {/* REVIEW : Component yapısı kullanmak gerekir, reusablity için. */}
         {/* Select: Kartvizit Seç */}
         <select
           name="cardId"

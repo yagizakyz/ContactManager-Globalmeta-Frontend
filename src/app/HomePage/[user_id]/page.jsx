@@ -1,3 +1,4 @@
+// REVIEW : API endpointleri sabit string olarak yazılmış, .env dosyasından alınmalı ve merkezi bir yerde yönetilmeli.
 "use client";
 
 import { useEffect, useState } from "react";
@@ -9,6 +10,7 @@ export default function HomePage() {
   const [cards, setCards] = useState([]);
   const [openMenuId, setOpenMenuId] = useState(null);
 
+  // REVIEW : Token localStorage'dan okunuyor, güvenlik için httpOnly cookie tercih edilmeli.
   const fetchCards = async () => {
     const token = localStorage.getItem("token");
     try {
@@ -31,7 +33,7 @@ export default function HomePage() {
     fetchCards();
   }, [user_id]);
 
-  // Menü dışına tıklanınca kapat
+  // REVIEW : DOM'a doğrudan erişim (document.querySelectorAll) React paradigmasına uygun değil, ref ve state ile yönetilmeli.
   useEffect(() => {
     const handleClickOutside = (event) => {
       const menuItems = document.querySelectorAll(".menu-wrapper");
@@ -52,7 +54,7 @@ export default function HomePage() {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
-  // ✅ Yeni silme işlemi (soft delete)
+  // REVIEW : Silme işlemi için endpoint'e id parametresi eklenmemiş, !gerekiyorsa! ilgili kartın id'si API'ye gönderilmeli.
   const handleDelete = async (card_id) => {
     const token = localStorage.getItem("token");
     if (!confirm("Bu Kartviziti silmek istediğine emin misin?")) return;
