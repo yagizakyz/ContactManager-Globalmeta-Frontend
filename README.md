@@ -1,17 +1,69 @@
-Nasıl Kullanılır
+Bu proje, React ve Next.js kullanılarak geliştirilmiş bir kartvizit ve bağlantı yönetim uygulamasıdır.
 
-1- Eğer üye değilsek üye oluyoruz ve ardından uygulamaya giriş yapıyoruz.
+## Özellikler
 
-2- Giriş yaptıktan sonra bizi Ana Sayfamız karşılıyor ve bu ana sayfada “Kartvizit Oluştur”, “Link Oluştur” butonları ve Kartvizitlerimiz karşılıyor.
+- Kullanıcı kaydı ve giriş işlemleri
+- Kartvizit oluşturma, düzenleme, silme ve görüntüleme
+- Kartvizitlere özel bağlantı (link) ekleme ve silme
+- Kartvizit detayında paylaşılabilir bağlantı ve QR kod oluşturma
+- Modern ve responsive arayüz (TailwindCSS)
 
-3- Kartvizit Oluştur butonu ile kartvizit oluşturma sayfamıza gidiyoruz. Bütün alanları doldurduktan sonra kartvizitimizin arkaplan rengini ve yaz rengimizi seçiyoruz, kartvizitimize adını verdikten sonra kayıt ediyoruz.
+## Kurulum
 
-4- Kartvizitimizi oluşturduktan sonra kartvizitimizle bağlantılı olacak linkleri ekliyoruz. Bunun için Ana Sayfadan Link Oluştur sayfasına gidiyoruz. Bu sayfada bizi kartvizitlerimizin olduğu select-picker, link adı ve link bağlantısı karşılıyor. Alt kısımda ise daha önce oluşturduğumuz linkler bulunuyor ve buradan bu linkleri silme işlemi yapabiliyoruz.
- 
-5- Ana Sayfada listelenmiş kartvizitlerimizin yanlarında bulunan üç noktaya(...) tıkladığımızda karşımıza 3 seçenek çıkıyor. 
+1. **Depoyu klonlayın:**
 
-6- Görüntüle sayfasına gittiğimizde oluşturduğumuz kartviziti görüyoruz. Arkaplan rengi ve yazı rengi bizim seçtiğimiz renklerde. Link kısmında daha önce oluşturduğumuz link bulunuyor ve bu link adına tıkladığımızda oluşturduğumuz bağlantıya gidecek. Altında bulunan paylaş butonuna bastığımızda bulunan mevcut sayfanın adresini kopyalıyoruz. Onunda altında bulunan QR kod bu kartvizit için oluşturulmuş özel QR kod.
- 
-7- Düzenle butonu ile kartvizit bilgilerini düzenlemek için oluşturulan sayfaya gidiyoruz ve bilgileri güncelliyoruz.
+   ```bash
+   git clone <repo-url>
+   cd ContactManager-Globalmeta-Frontend
+   ```
 
-8- Sil butonu ile seçtiğimiz kartı siliyoruz
+2. **Bağımlılıkları yükleyin:**
+
+   ```bash
+   npm install
+   ```
+
+3. **Çevresel değişkenleri ayarlayın:**
+
+   Proje kök dizininde bir `.env.local` dosyası oluşturun ve API adreslerinizi buraya ekleyin:
+
+   ```env
+   NEXT_PUBLIC_API_BASE_URL=https://api.ornek.com
+   ```
+
+4. **Projeyi başlatın:**
+
+   ```bash
+   npm run dev
+   ```
+
+   Uygulama varsayılan olarak [http://localhost:3000](http://localhost:3000) adresinde çalışacaktır.
+
+## Kullanım
+
+1. **Kayıt Olun ve Giriş Yapın:**
+   - Kayıt sayfasından yeni kullanıcı oluşturun, ardından giriş yapın.
+2. **Ana Sayfa:**
+   - Giriş yaptıktan sonra ana sayfada kartvizitlerinizi ve "Kartvizit Oluştur" ile "Link Oluştur" butonlarını göreceksiniz.
+3. **Kartvizit Oluşturma:**
+   - "Kartvizit Oluştur" butonuna tıklayarak yeni kartvizit ekleyin. Tüm alanları doldurun, arka plan ve yazı rengini seçin.
+4. **Link Ekleme:**
+   - Ana sayfadan "Link Oluştur" sayfasına gidin. Kartvizit seçin, link adı ve bağlantısını girin, ekleyin. Alt kısımda mevcut linklerinizi görebilir ve silebilirsiniz.
+5. **Kartvizit İşlemleri:**
+   - Kartvizitlerin yanındaki üç noktaya tıklayarak "Görüntüle", "Düzenle" veya "Sil" işlemlerini yapabilirsiniz.
+6. **Kartvizit Detayı:**
+   - "Görüntüle" ile kartvizit detayına ulaşın. Bağlantılara tıklayabilir, paylaş butonuyla linki kopyalayabilir veya QR kodunu kullanabilirsiniz.
+
+## Proje Yapısı
+
+```text
+src/
+  app/
+    login/           # Giriş sayfası
+    signup/          # Kayıt sayfası
+    HomePage/        # Ana sayfa ve kartvizit listesi
+    CardCreatePage/  # Kartvizit oluşturma
+    CardShowPage/    # Kartvizit detay
+    CardUpdatePage/  # Kartvizit güncelleme
+    LinkPage/        # Link ekleme ve listeleme
+```
